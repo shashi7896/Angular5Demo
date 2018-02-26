@@ -1,0 +1,20 @@
+<md-input #myInput [(ngModel)]="name" 
+(input)="filterItem(myInput.value)">
+</md-input>
+
+<div *ngFor="let item of filteredItems">
+   {{item.name}}
+</div>
+<!-- Lets assume that we fetched a list of items from the server as items -->
+private filteredItems : any[];
+
+assignList(){|
+    this.filteredItems = Object.assign([], this.items);
+ }
+ filterItem(value){
+    if(!value) this.assignList(); //when nothing has typed
+    this.filteredItems = Object.assign([], this.items).filter(
+       item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1
+    )
+ }
+ this.assignList();//when you fetch collection from server.
